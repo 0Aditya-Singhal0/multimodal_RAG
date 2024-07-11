@@ -28,12 +28,24 @@ services:
     image: cr.weaviate.io/semitechnologies/multi2vec-bind:imagebind-1.0.2
     environment:
       ENABLE_CUDA: '1'
+      NVIDIA_VISIBLE_DEVICES: all
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - capabilities: [gpu]
   ollama:
     image: ollama/ollama
   reranker-transformers:
     image: cr.weaviate.io/semitechnologies/reranker-transformers:cross-encoder-ms-marco-TinyBERT-L-2-v2-latest 
     environment:
       ENABLE_CUDA: '1'
+      NVIDIA_VISIBLE_DEVICES: all
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - capabilities: [gpu]
 volumes:
   weaviate_data:
 ...
